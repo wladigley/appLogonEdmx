@@ -1,0 +1,76 @@
+﻿@using LogonWEB.Models
+@model Usuarios
+@{
+    ViewBag.Title = "Log in";
+}
+
+<h2>@ViewBag.Title.</h2>
+<div class="row">
+    <div class="col-md-8">
+        <section id="loginForm">
+           
+            @using (Html.BeginForm("Logar", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                if (TempData["notice"] != null)
+                {
+                    <ul>
+                        <li style='color:red;'>@TempData["notice"]</li>
+                    </ul>
+                }
+                @Html.ValidationMessage("Logar", new { @class = "text-danger" })
+                <h4>Use Login e Senha para entrar.</h4>
+                <hr/>
+                
+                <div class="form-group">
+
+                    @Html.LabelFor(m => m.Login, new { @class = "col-md-2 control-label"})
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Login, new { @class = "form-control", @placeholder = "Login...", autofocus = "autofocus" })
+                        @Html.ValidationMessageFor(m => m.Login, "", new{ @class = "text-danger"})
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Senha, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Senha, new { @class = "form-control", @placeholder = "Senha..." })
+                        @Html.ValidationMessageFor(m => m.Senha, "", new { @class = "text-danger"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="checkbox">
+                            @*@Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)*@
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Login" class="btn btn-default" />
+                    </div>
+                </div>
+                <p>
+                    @Html.ActionLink("Crie sua conta!", "Create", "Usuarios")
+                    
+                </p>
+                @* Enable this once you have account confirmation enabled for password reset functionality
+                    <p>
+                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                    </p>*@
+            }
+        </section>
+    </div>
+    <div class="col-md-4">
+        <section id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

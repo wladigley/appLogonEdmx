@@ -1,0 +1,33 @@
+﻿
+@model LogonWEB.Models.Usuarios
+@using LogonWEB.Manager
+
+@if (SessionManager.sessionLogada())
+{
+
+
+using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+{
+@Html.AntiForgeryToken()
+<ul class="nav navbar-nav navbar-right">
+    <li class="user-block col-sm-2">
+       
+        @{var img = ImagemManager.GetUsuarioImagem(Model);}
+        <img class="img-circle img-bordered-sm" src="@img" alt="user image">
+      
+    </li>
+    <li>
+      @*@Html.ActionLink("Olá " + Session["LogedUserFullName"] + " !", "TimeLine", "Account", routeValues: null, htmlAttributes: new { title = "TimeLine" })*@
+        @Html.ActionLink("Olá " + Session["LogedUserFullName"] + " !", "Details", "Usuarios", new { id = Session["LogedUserID"] }, null)
+   </li>
+    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log Out</a></li>
+</ul>
+}
+}
+else
+{
+<ul class="nav navbar-nav navbar-right">
+    <li>@Html.ActionLink("Cadastrar-se", "Create", "Usuarios", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+</ul>
+}

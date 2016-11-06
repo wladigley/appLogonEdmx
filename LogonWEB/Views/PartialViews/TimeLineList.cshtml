@@ -1,0 +1,51 @@
+﻿@model List<LogonWEB.Models.Publicacao>
+@using LogonWEB.Manager
+@{
+    Layout = null;
+}
+
+@foreach (LogonWEB.Models.Publicacao p in Model)
+{
+
+    <div class="row">
+    <div class="col-md-12">
+        <!-- The time line -->
+        <ul class="timeline">
+            <!-- timeline item -->
+            <li>
+                <i class="fa fa-envelope bg-blue"></i>
+                <div class="timeline-item">
+                    <span class="time"><i class="fa fa-clock-o"></i>@p.DataCadastro </span>
+                    <div class="user-block" >
+                      @{
+                          var img = ImagemManager.GetUsuarioImagem(p.Usuarios);
+                       }
+                        <img class="img-circle img-bordered-sm" src="@img" alt="user image">
+                        <span class="username">
+                            @*<a href="#"> @p.Usuarios.Nome</a>*@
+                            
+                            @Html.ActionLink(p.Usuarios.Nome, "Details", "Usuarios", new { id = p.Id_Usuario }, null)
+                            
+
+                            <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                        </span>
+                        <span class="description">Sent you a message - @p.DataCadastro</span>
+                    </div>
+
+                    <div class="timeline-body">
+                        <p >@p.TextPub</p>
+
+                        @*<div class="timeline-footer pull-right">
+                            <a class="btn btn-primary btn-xs"><i class="fa fa-thumbs-o-up"></i> up!</a>
+                            <a class="btn btn-primary btn-xs "><i class="fa fa-thumbs-o-down"></i>down!</a>
+                        </div>*@
+                    </div>
+                </div>
+            </li>
+            <!-- END timeline item -->
+        </ul>
+    </div>
+</div>
+
+}
+

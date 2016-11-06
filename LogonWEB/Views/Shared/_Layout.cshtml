@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/AdminLTE.min.css" rel="stylesheet" />
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" />
+</head>
+<body style="background-color: #f2f2f2">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="box-shadow: 2px 2px 5px #888888">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "TimeLine", "Account", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+
+                    </li>
+                </ul>
+                @Html.Action("GetUsuarioToolsPartial", "Account")@*modal*@
+                <div class="navbar-collapse collapse">
+                    @Html.Action("GetLoginPartial", "Account")
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <div class="modal fade col-sm-12" id="exampleModal" tabindex="9999999999" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+      
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+                </div>
+                <div class="modal-body">
+                        <div class="">
+                            <label for="message-text" class="control-label">Message:</label>
+                            <textarea class="form-control"style="min-width:100%" id="message-text" autofocus></textarea>
+                            <div class="">
+                                <input type="radio" name="Privacidade" value="0" checked> Publica <input type="radio" name="Privacidade"value="1"> Privada
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="PostTimeLine()"data-dismiss="modal">Send Publicação</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+       
+    function PostTimeLine() {
+        
+        //pegar do modal
+        param = new Object();
+        //param.TextPub = "teste teste teste teste teste;";
+        //param.Privacidade = true;
+       
+        param.TextPub = $('textarea#message-text').val();
+        
+        param.Privacidade = $('input[name=Privacidade]:checked').val();
+
+        $.ajax({
+            url: '@Url.Action("PostTimeLine", "Account")',
+            type: 'POST',
+            data: param,//aqui é adicionado o objeto para o controller externo
+            success: function (data) {
+                $("#timeLineList").html(data);
+                $('#message-text').val("");
+            }
+        });
+    }
+
+    </script>
+
+
+
+</body>
+
+
+
+</html>

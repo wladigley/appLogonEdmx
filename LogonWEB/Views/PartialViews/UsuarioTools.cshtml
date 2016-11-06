@@ -1,0 +1,23 @@
+﻿@model LogonWEB.Models.Usuarios
+@using LogonWEB.Manager
+@if (SessionManager.sessionLogada())
+{
+    @*<ul class="nav navbar-nav navbar-right">
+        <li></li>
+    </ul>*@
+    <div class="col-sm-3" style="margin-left:35%;margin-top:1%">
+        <button onclick ="lipaTextArea()"class="btn btn-primary btn-xs" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-thumbs-o-up"></i>Escrever Publicação!</button>
+        @if (SessionManager.sessionLogada() && SessionManager.sessionAdminLogada())
+        {
+        
+         @Html.ActionLink("Gerenciar Usuários", "Index", "Usuarios", routeValues: null, htmlAttributes: new { title = "Gerenciar", @class = "btn btn-primary btn-xs", @style = "color:white" })
+        
+        }
+    </div>
+    <script>
+        function lipaTextArea() {
+            $('#message-text').val("");
+        }
+        
+    </script>
+}

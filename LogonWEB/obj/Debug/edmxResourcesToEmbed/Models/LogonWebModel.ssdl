@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DesenvolvedorSASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Publicacao">
+    <Key>
+      <PropertyRef Name="Id_Publicacao" />
+    </Key>
+    <Property Name="Id_Publicacao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TextPub" Type="varchar(max)" Nullable="false" />
+    <Property Name="ImgPub" Type="image" />
+    <Property Name="Privacidade" Type="bit" Nullable="false" />
+    <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+    <Property Name="DataUltAlteracao" Type="datetime" />
+    <Property Name="Id_Usuario" Type="int" Nullable="false" />
+    <Property Name="Id_Comentarios" Type="int" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="Id_Usuario" />
+    </Key>
+    <Property Name="Id_Usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Login" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Senha" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="20" />
+    <Property Name="Imagem" Type="image" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+    <Property Name="DataUltAlteração" Type="datetime" Nullable="false" />
+    <Property Name="UserAdmin" Type="bit" />
+  </EntityType>
+  <Association Name="FK_Publicacao_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Publicacao" Type="Self.Publicacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Id_Usuario" />
+      </Principal>
+      <Dependent Role="Publicacao">
+        <PropertyRef Name="Id_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DesenvolvedorSASModelStoreContainer">
+    <EntitySet Name="Publicacao" EntityType="Self.Publicacao" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Publicacao_Usuarios" Association="Self.FK_Publicacao_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Publicacao" EntitySet="Publicacao" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,25 @@
+﻿@model LogonWEB.Models.Usuarios
+@using LogonWEB.Manager
+@{
+    ViewBag.Title = "TimeLine";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h5><b>@Session["LogedUserFullName"]</b></h5>
+<h5>Bem Vindo a sua </h5><h2>Time<strong>Line</strong><b></b></h2>
+
+
+
+
+@if (SessionManager.sessionLogada())
+{
+<div id="timeLineList">
+    
+    <div id="scroll"></div>
+    @Html.Action("GetTimeLineList", "Account")
+
+</div>
+}else
+{
+}

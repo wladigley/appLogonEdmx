@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DesenvolvedorSASModelStoreContainer" CdmEntityContainer="DesenvolvedorSASEntities">
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="DesenvolvedorSASModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="UserAdmin" ColumnName="UserAdmin" />
+          <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Senha" ColumnName="Senha" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Imagem" ColumnName="Imagem" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+          <ScalarProperty Name="DataUltAlteração" ColumnName="DataUltAlteração" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Publicacao">
+      <EntityTypeMapping TypeName="DesenvolvedorSASModel.Publicacao">
+        <MappingFragment StoreEntitySet="Publicacao">
+          <ScalarProperty Name="Id_Comentarios" ColumnName="Id_Comentarios" />
+          <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+          <ScalarProperty Name="DataUltAlteracao" ColumnName="DataUltAlteracao" />
+          <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+          <ScalarProperty Name="Privacidade" ColumnName="Privacidade" />
+          <ScalarProperty Name="ImgPub" ColumnName="ImgPub" />
+          <ScalarProperty Name="TextPub" ColumnName="TextPub" />
+          <ScalarProperty Name="Id_Publicacao" ColumnName="Id_Publicacao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
